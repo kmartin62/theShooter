@@ -31,6 +31,7 @@ namespace theShooter
             //helper
             helpers.Add(new Brick(x + 60, y - 580, 70, 50));
             helpers.Add(new Brick(x + 70, y  - 1000, 70, 50));
+            helpers.Add(new Brick(x + 453, y - 705, 60, 50));
 
             //1
             bricks.Add(new Brick(x, y, 50, 50));
@@ -56,7 +57,13 @@ namespace theShooter
             bricks.Add(new Brick(x + 230, y - 75, 50, 50));
             bricks.Add(new Brick(x + 280, y - 75, 50, 50));
             bricks.Add(new Brick(x + 330, y - 75, 50, 50));
-            bricks.Add(new Brick(x + 380, y - 75, 50, 50));
+            bricks.Add(new Brick(x + 380, y - 75, 65, 50));
+
+            //4
+            bricks.Add(new Brick(x + 520, y - 75, 70, 50));
+            bricks.Add(new Brick(x + 590, y - 75, 50, 50));
+            bricks.Add(new Brick(x + 640, y - 75, 50, 50));
+            bricks.Add(new Brick(x + 690, y - 75, 50, 50));
 
         }
 
@@ -64,7 +71,8 @@ namespace theShooter
         {
             walls.Add(new Wall(x, y - 300, 50, 350)); //1
             walls.Add(new Wall(x + 130, y - 400, 50, 375)); //2
-            walls.Add(new Wall(x + 180, y - 75, 250, 50));
+            walls.Add(new Wall(x + 180, y - 75, 263, 50)); //3
+            walls.Add(new Wall(x + 520, y - 75, 200, 50)); //4
         }
 
         public void Draw(Graphics g)
@@ -87,29 +95,25 @@ namespace theShooter
 
         public void Check()
         {
-
             if(hero.X < walls[0].X)
             {
                 if(hero.Y == 390 || hero.Y < 390)
                 {
                     hero.Up = true;
                     hero.Down = false;
-                    hero.Right = false;
-                  //  hero.Left = false;
+                    hero.Right = true;
                 }
 
                 if (hero.Y < 390)
                 {
                     hero.Down = true;
                     hero.Right = false;
-                   // hero.Left = false;
                 }
 
                 if (hero.Y + hero.Height + 10 < walls[0].Y)
                 {
                     hero.Up = false;
                     hero.Right = false;
-                   //hero.Left = false;
                 }
 
                 
@@ -151,14 +155,49 @@ namespace theShooter
             }
 
             if (hero.X > helpers[1].X && hero.X < walls[2].X + walls[2].Width)
-            {
-                
+            { 
                     hero.Left = true;
                     hero.Up = false;
-                
+            }
+
+            //helper
+            if(hero.X > helpers[2].X && hero.X + hero.Width < helpers[2].X + helpers[2].Width)
+            {
+                hero.Up = true;
+                if(hero.Y < 390)
+                {
+                    hero.Down = true;
+                    hero.Right = false;
+                    hero.Left = false;
+                }
+
+                if (hero.Y + hero.Height + 10 < walls[0].Y)
+                {
+                    hero.Up = false;
+                    //hero.Right = false;
+                }
+
+            }
+            else
+            {
+                hero.Up = false;
+            }
+
+            if(hero.Y == 390)
+            {
+                hero.Down = false;
+                hero.Left = true;
+                hero.Right = true;
+            }
+
+            if(hero.Y == 390)
+            {
+                if(hero.X + hero.Width > 816 - 40)
+                {
+                    hero.Right = false;
+                }
             }
             
-            // hero.Check();
         }
     }
 }

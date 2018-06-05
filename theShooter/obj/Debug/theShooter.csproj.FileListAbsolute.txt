@@ -10,3 +10,15 @@ C:\Users\pc\source\repos\theShooter\theShooter\obj\Debug\theShooter.csproj.CoreC
 C:\Users\pc\source\repos\theShooter\theShooter\obj\Debug\theShooter.exe
 C:\Users\pc\source\repos\theShooter\theShooter\obj\Debug\theShooter.pdb
 C:\Users\pc\source\repos\theShooter\theShooter\bin\Debug\8bit_megaman_cyclop_edit_by_oilusionista-d32d6fa.gif
+C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\bin\Debug\8bit_megaman_cyclop_edit_by_oilusionista-d32d6fa.gif
+C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\bin\Debug\bricks_001aPreview1.jpg
+C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\bin\Debug\theShooter.exe.config
+C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\bin\Debug\theShooter.exe
+C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\bin\Debug\theShooter.pdb
+C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\obj\Debug\theShooter.csprojResolveAssemblyReference.cache
+C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\obj\Debug\theShooter.Form1.resources
+C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\obj\Debug\theShooter.Properties.Resources.resources
+C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\obj\Debug\theShooter.csproj.GenerateResource.cache
+C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\obj\Debug\theShooter.csproj.CoreCompileInputs.cache
+C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\obj\Debug\theShooter.exe
+C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\obj\Debug\theShooter.pdb

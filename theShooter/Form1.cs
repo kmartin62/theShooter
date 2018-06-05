@@ -16,11 +16,13 @@ namespace theShooter
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            game.Check();
             if (game.hero.Up)
             {
                 if(e.KeyCode == Keys.Up)
                 {
                     game.hero.ChangeDirection(Hero.DIRECTION.UP);
+                    
                     game.Move();
                 }
             }
@@ -58,7 +60,7 @@ namespace theShooter
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            game.Check();
+            //do something
         }
 
         public Form1()
