@@ -31,7 +31,8 @@ namespace theShooter
             //helper
             helpers.Add(new Brick(x + 60, y - 580, 70, 50));
             helpers.Add(new Brick(x + 70, y  - 1000, 70, 50));
-            helpers.Add(new Brick(x + 453, y - 705, 60, 50));
+            helpers.Add(new Brick(x + 453, y - 750, 60, 50));
+            helpers.Add(new Brick(x + 330, y - 355, 65, 40));
 
             //1
             bricks.Add(new Brick(x, y, 50, 50));
@@ -65,6 +66,32 @@ namespace theShooter
             bricks.Add(new Brick(x + 640, y - 75, 50, 50));
             bricks.Add(new Brick(x + 690, y - 75, 50, 50));
 
+            //5
+            bricks.Add(new Brick(x + 520, y - 125, 50, 50));
+            bricks.Add(new Brick(x + 520, y - 175, 50, 50));
+            bricks.Add(new Brick(x + 520, y - 225, 50, 50));
+            bricks.Add(new Brick(x + 520, y - 275, 50, 50));
+            bricks.Add(new Brick(x + 520, y - 305, 50, 30));
+
+            bricks.Add(new Brick(x + 570, y - 125, 75, 50));
+            bricks.Add(new Brick(x + 570, y - 175, 75, 50));
+            bricks.Add(new Brick(x + 570, y - 225, 75, 50));
+            bricks.Add(new Brick(x + 570, y - 275, 75, 50));
+            bricks.Add(new Brick(x + 570, y - 305, 75, 30));
+
+            //6
+            bricks.Add(new Brick(x + 395, y - 125, 50, 50));
+            bricks.Add(new Brick(x + 395, y - 175, 50, 50));
+            bricks.Add(new Brick(x + 395, y - 225, 50, 50));
+            bricks.Add(new Brick(x + 395, y - 275, 50, 50));
+            bricks.Add(new Brick(x + 395, y - 305, 50, 30));
+
+            //7
+            bricks.Add(new Brick(x + 260, y - 305, 65, 40));
+
+            //8
+            bricks.Add(new Brick(x + 260, y - 185, 65, 40));
+
         }
 
         private void addWall()
@@ -73,6 +100,10 @@ namespace theShooter
             walls.Add(new Wall(x + 130, y - 400, 50, 375)); //2
             walls.Add(new Wall(x + 180, y - 75, 263, 50)); //3
             walls.Add(new Wall(x + 520, y - 75, 200, 50)); //4
+            walls.Add(new Wall(x + 520, y - 305, 125, 230)); //5
+            walls.Add(new Wall(x + 393, y - 305, 50, 230)); //6
+            walls.Add(new Wall(x + 260, y - 305, 65, 40)); //7
+            walls.Add(new Wall(x + 260, y - 185, 65, 40)); //8
         }
 
         public void Draw(Graphics g)
@@ -163,6 +194,9 @@ namespace theShooter
             //helper
             if(hero.X > helpers[2].X && hero.X + hero.Width < helpers[2].X + helpers[2].Width)
             {
+
+                //kje ima porta
+
                 hero.Up = true;
                 if(hero.Y < 390)
                 {
@@ -174,18 +208,23 @@ namespace theShooter
                 if (hero.Y + hero.Height + 10 < walls[0].Y)
                 {
                     hero.Up = false;
-                    //hero.Right = false;
+                    //proverka za left, porta
+                    hero.Right = true;
+                    hero.Left = true;
+
                 }
 
-            }
-            else
-            {
-                hero.Up = false;
+                if(hero.Y == 390)
+                {
+                    hero.Right = true;
+                    hero.Left = true;
+                    hero.Down = false;
+                }
             }
 
-            if(hero.Y == 390)
+            if(hero.X + hero.Width > helpers[2].X + helpers[2].Width)
             {
-                hero.Down = false;
+                hero.Up = false;
                 hero.Left = true;
                 hero.Right = true;
             }
@@ -195,9 +234,76 @@ namespace theShooter
                 if(hero.X + hero.Width > 816 - 40)
                 {
                     hero.Right = false;
+
+
                 }
             }
-            
+
+            if(hero.Y < walls[3].Y && hero.X > walls[4].X)
+            {
+               
+                if (hero.X + hero.Width > 816 - 40)
+                {
+                    hero.Right = false;
+                    //kje ima porta
+                    hero.Down = true;
+                }
+
+                
+                if (hero.Y + hero.Height < walls[4].Y + walls[4].Height)
+                {
+                    hero.Up = true;
+                    hero.Left = false;
+
+                    if (hero.Y + hero.Height + 10 < walls[0].Y)
+                    {
+                        hero.Up = false;
+                        hero.Left = true;
+                       
+                    }
+
+                    if(hero.Y + hero.Height > walls[4].Y + walls[4].Height - 10)
+                    {
+                        hero.Down = false;
+                    }
+                }
+            }
+
+            //kje ima porta helper[3] walls[6] walls[7]
+            if (hero.Y < walls[2].Y)
+            {
+                if (hero.X > helpers[3].X && hero.X + hero.Width < helpers[3].X + helpers[3].Width)
+                {
+                    hero.Down = true;
+                    hero.Up = true;
+
+                    if (hero.Y + hero.Height > walls[6].Y)
+                    {
+                        hero.Right = false;
+                        hero.Left = false;
+                    }
+
+                    if (hero.Y + hero.Height + 10 < walls[0].Y)
+                    {
+                        hero.Up = false;
+                        hero.Left = true;
+                        hero.Right = true;
+
+                    }
+                }
+
+ 
+            }
+            //walls[5]
+            if(hero.Y > walls[7].Y && hero.X < walls[5].X && hero.X > walls[1].X + walls[1].Width)
+            {
+                if (hero.Y + hero.Height > walls[4].Y + walls[4].Height - 10)
+                    {
+                        hero.Down = false;
+                    }
+            }
+
+
         }
     }
 }
