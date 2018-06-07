@@ -13,6 +13,7 @@ namespace theShooter
         public Scene scene = new Scene();
         public Shoot shoot { get; set; }
         public Hero hero { get; set; }
+        public bool endGame;
         private int x = 80;
         private int y = 400;
 
@@ -20,11 +21,35 @@ namespace theShooter
         {
             hero = new Hero(15, 390, 50, 50);
             shoot = new Shoot(hero.X, hero.Y);
-          
+            endGame = false;
             addBrick();
             addWall();
             addCrown();
             addGates();
+            addZombies();
+        }
+
+        public void addZombies()
+        {
+            scene.addZombie();
+        }
+
+        public void checkDeadZombie()
+        {
+            scene.deadZombie();
+        }
+
+        public void HeroDead()
+        {
+            if (scene.HeroDead(hero))
+            {
+                endGame = true;
+            }
+        }
+
+        public void MoveZombies()
+        {
+            scene.MoveZombies();
         }
 
         public void MoveShoot()

@@ -15,6 +15,8 @@ namespace theShooter
         public bool ShouldGo { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
 
         public Shoot()
         {
@@ -25,13 +27,14 @@ namespace theShooter
         {
             X = x;
             Y = y;
+            Width = Height = 40;
             ShouldGo = false;
             direction = SHOOTINGDIRECTION.DOWN; 
         }
 
         public void Draw(Graphics g)
         {
-            g.DrawImage(new Bitmap(weapon), new Rectangle(new Point(X, Y), new Size(40, 40)));
+            g.DrawImage(new Bitmap(weapon), new Rectangle(new Point(X, Y), new Size(Width, Height)));
         }
 
         public void changeDirection(SHOOTINGDIRECTION dir)
@@ -89,6 +92,11 @@ namespace theShooter
         }
 
         public bool IsHitGate(Gate wall)
+        {
+            return X <= wall.X && wall.X <= X + 40 && wall.Y >= Y && wall.Y <= Y + 40;
+        }
+
+        public bool IsHitZombie(Zombie wall)
         {
             return X <= wall.X && wall.X <= X + 40 && wall.Y >= Y && wall.Y <= Y + 40;
         }

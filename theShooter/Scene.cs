@@ -15,7 +15,11 @@ namespace theShooter
         public List<Crown> crowns { get; set; }
         public List<Gate> gates { get; set; }
         public List<Shoot> bullets { get; set; }
+        public List<Zombie> zombies { get; set; }
         private bool first, second, third;
+        private bool start0 = true;
+        private bool start1 = true;
+        private bool start2 = true;
 
         public Scene()
         {
@@ -25,6 +29,7 @@ namespace theShooter
             crowns = new List<Crown>();
             gates = new List<Gate>();
             bullets = new List<Shoot>();
+            zombies = new List<Zombie>();
             first = second = third = false;
         }
 
@@ -34,6 +39,121 @@ namespace theShooter
             {
                 b.MoveBullet();
             }
+        }
+
+        public void addZombie()
+        {
+            zombies.Add(new Zombie(150, 390)); //0
+            zombies.Add(new Zombie(270, 270)); //1
+            zombies.Add(new Zombie(420, 150)); //2
+        }
+
+        public void deadZombie()
+        {
+            for(int i = 0; i < bullets.Count; i++)
+            {
+                for(int j = 0; j < zombies.Count; j++)
+                {
+                    if (bullets[i].IsHitZombie(zombies[j]))
+                    {
+                        zombies[j].Shot = true;
+                    }
+                }
+            }
+
+            for(int i = zombies.Count - 1; i >= 0; i--)
+            {
+                if (zombies[i].Shot)
+                {
+                    zombies.RemoveAt(i);
+                }
+            }
+        }
+
+        public bool HeroDead(Hero hero)
+        {
+            foreach(Zombie z in zombies)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public void MoveZombies()
+        {
+
+            if (!zombies[0].Shot)
+            {
+                if (start0)
+                {
+                    zombies[0].X += 50;
+                    if (zombies[0].X >= 700)
+                    {
+                        start0 = false;
+                    }
+                }
+            }
+
+            
+            if (!start0)
+            {
+                zombies[0].X -= 50;
+                if(zombies[0].X <= 150)
+                {
+                    start0 = true;
+                }
+            }
+           
+
+                //start1 za 1 zombie
+                if (!zombies[1].Shot)
+                {
+                    if (start1)
+                    {
+                        zombies[1].X += 50;
+                        if (zombies[1].X >= 450)
+                        {
+                            start1 = false;
+                        }
+                    }
+
+                    if (!start1)
+                    {
+                        zombies[1].X -= 50;
+                        if (zombies[1].X <= 270)
+                        {
+                            start1 = true;
+                        }
+                    }
+                }
+            
+
+            
+
+                //start2 za 2 zombie
+                if (!zombies[2].Shot)
+                {
+                    if (!start2)
+                    {
+                        zombies[2].X += 50;
+                        if (zombies[2].X >= 450)
+                        {
+                            start2 = true;
+                        }
+                    }
+
+                    if (start2)
+                    {
+                        zombies[2].X -= 50;
+                        if (zombies[2].X <= 270)
+                        {
+                            start2 = false;
+                        }
+                    }
+                }
+            
+
         }
 
         //public void ChangeDir(Shoot.SHOOTINGDIRECTION dir)
@@ -67,6 +187,14 @@ namespace theShooter
 
         public void checkBullet(int x, int y)
         {
+            for (int i = 0; i < bullets.Count; i++)
+            {
+                if (bullets[i].Y + 20 < 0 || bullets[i].Y + 20 > y || bullets[i].X + 20 < 0 || bullets[i].X + 20 > x)
+                {
+                    bullets[i].ShouldGo = true;
+                }
+            }
+
             for(int i = 0; i < bullets.Count; i++)
             {
                 for(int j = 0; j < bricks.Count; j++)
@@ -234,6 +362,7 @@ namespace theShooter
             crowns.ForEach(c => c.Draw(g));
             gates.ForEach(c => c.Draw(g));
             bullets.ForEach(c => c.Draw(g));
+            zombies.ForEach(c => c.Draw(g));
         }
 
      

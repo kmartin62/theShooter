@@ -106,6 +106,15 @@ namespace theShooter
         {
             game.MoveShoot();
             game.checkBullets(Width, Height);
+            game.MoveZombies();
+            //game.HeroDead();
+            game.checkDeadZombie();
+
+            //if (game.endGame)
+           // {
+           //     MessageBox.Show("Yes");
+           // }
+           
             Invalidate();
 
         }

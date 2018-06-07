@@ -26,3 +26,4 @@ C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\bin\Debug\crown.png
 C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\bin\Debug\line-dividers-without-background-6.png
 C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\bin\Debug\vertical gate.png
 C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\bin\Debug\shot_poulpi.png
+C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\bin\Debug\zombie_pixelart2.png
