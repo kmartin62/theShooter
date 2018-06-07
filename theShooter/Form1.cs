@@ -60,7 +60,9 @@ namespace theShooter
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //do something
+            game.check();
+
+            Invalidate();
         }
 
         public Form1()
@@ -80,7 +82,7 @@ namespace theShooter
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             game.Draw(e.Graphics);
-            //e.Graphics.DrawImage(new Bitmap("8bit_megaman_cyclop_edit_by_oilusionista-d32d6fa.gif"), new Rectangle(new Point(15, 50), new Size(50, 50)));
+            //e.Graphics.DrawImage(new Bitmap("line-dividers-without-background-6.png"), new Rectangle(new Point(15, 50), new Size(50, 50)));
            
         }
     }

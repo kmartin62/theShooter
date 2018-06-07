@@ -22,3 +22,6 @@ C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\obj\Debug\theShooter.csproj.G
 C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\obj\Debug\theShooter.csproj.CoreCompileInputs.cache
 C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\obj\Debug\theShooter.exe
 C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\obj\Debug\theShooter.pdb
+C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\bin\Debug\crown.png
+C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\bin\Debug\line-dividers-without-background-6.png
+C:\Users\pc\Desktop\VIZUELNO\theShooter\theShooter\bin\Debug\vertical gate.png

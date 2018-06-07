@@ -12,13 +12,75 @@ namespace theShooter
         public List<Brick> helpers { get; set; }
         public List<Brick> bricks { get; set; }
         public List<Wall> walls { get; set; }
-        private int z = 0, q = 790;
+        public List<Crown> crowns { get; set; }
+        public List<Gate> gates { get; set; }
+        private bool first, second, third;
 
         public Scene()
         {
             helpers = new List<Brick>();
             bricks = new List<Brick>();
             walls = new List<Wall>();
+            crowns = new List<Crown>();
+            gates = new List<Gate>();
+            first = second = third = false;
+        }
+
+        public void addGates()
+        {
+            gates.Add(new Gate(527, 320, 70, 70, true)); //0
+            gates.Add(new Gate(460, 0, 70, 100, false)); //1
+            gates.Add(new Gate(730, 70, 70, 70, true)); //2
+        }
+
+        public void addCrowns()
+        {
+            crowns.Add(new Crown(730, 390, 50, 50)); //0
+            crowns.Add(new Crown(730, 20, 50, 50)); //1
+            crowns.Add(new Crown(350, 265, 50, 50)); //2
+        }
+
+        public void check(Hero hero)
+        {
+            if(crowns.Count == 2)
+            {
+                first = true;
+            }
+
+            if(crowns.Count == 1)
+            {
+                second = true;
+            }
+
+            if(crowns.Count == 0)
+            {
+                third = true;
+            }
+
+            for (int i = 0; i < crowns.Count; i++)
+            {
+                if (crowns[i].IsHit(hero))
+                {
+                    crowns[i].IsColliding = true;
+                    gates[i].Open = true;
+                }
+            }
+
+            for(int i = crowns.Count - 1; i >= 0; i--)
+            {
+                if (crowns[i].IsColliding)
+                {
+                    crowns.RemoveAt(i);
+                }
+            }
+
+            for(int i = gates.Count - 1; i >= 0; i--)
+            {
+                if (gates[i].Open)
+                {
+                    gates.RemoveAt(i);
+                }
+            }
         }
 
         public void addWalls(int x, int y)
@@ -44,7 +106,7 @@ namespace theShooter
             helpers.Add(new Brick(x + 330, y - 3555, 65, 40)); //3 po y
             helpers.Add(new Brick(x + 2600, y - 255, 65, 60)); //4 po x
             helpers.Add(new Brick(x + 2600, y - 135, 65, 60)); //5 po x
-            helpers.Add(new Brick(x + 190, y - 3550, 65, 40)); //6 po y
+            helpers.Add(new Brick(x + 185, y - 3550, 70, 40)); //6 po y
 
 
             //1
@@ -111,7 +173,11 @@ namespace theShooter
             helpers.ForEach(c => c.Draw(g));
             bricks.ForEach(c => c.Draw(g));
             walls.ForEach(c => c.Draw(g));
+            crowns.ForEach(c => c.Draw(g));
+            gates.ForEach(c => c.Draw(g));
         }
+
+     
 
         public void Check(Hero hero)
         {
@@ -185,8 +251,11 @@ namespace theShooter
             {
 
                 //kje ima porta
+                if (first)
+                {
+                    hero.Up = true;
+                }
 
-                hero.Up = true;
                 if (hero.Y < 390)
                 {
                     hero.Down = true;
@@ -199,7 +268,10 @@ namespace theShooter
                     hero.Up = false;
                     //proverka za left, porta
                     hero.Right = true;
-                    hero.Left = true;
+                    if (second)
+                    {
+                        hero.Left = true;
+                    }
 
                 }
 
@@ -235,7 +307,10 @@ namespace theShooter
                 {
                     hero.Right = false;
                     //kje ima porta
-                    hero.Down = true;
+                    if (third)
+                    {
+                        hero.Down = true;
+                    }
                 }
 
 

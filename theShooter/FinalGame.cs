@@ -22,6 +22,23 @@ namespace theShooter
           
             addBrick();
             addWall();
+            addCrown();
+            addGates();
+        }
+
+        public void addGates()
+        {
+            scene.addGates();
+        }
+
+        public void check()
+        {
+            scene.check(hero);
+        }
+
+        private void addCrown()
+        {
+            scene.addCrowns();
         }
 
         private void addBrick()

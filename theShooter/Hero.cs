@@ -65,11 +65,12 @@ namespace theShooter
 
         public void Move()
         {
+            int Z = 15;
             if (Up)
             {
                 if (dir == DIRECTION.UP)
                 {
-                    Y = Y - 10;
+                    Y = Y - Z;
                 }
             }
 
@@ -77,7 +78,7 @@ namespace theShooter
             {
                 if (dir == DIRECTION.DOWN)
                 {
-                    Y = Y + 10;
+                    Y = Y + Z;
                 }
             }
 
@@ -85,7 +86,7 @@ namespace theShooter
             {
                 if(dir == DIRECTION.RIGHT)
                 {
-                    X = X + 10;
+                    X = X + Z;
                 }
             }
 
@@ -93,7 +94,7 @@ namespace theShooter
             {
                 if(dir == DIRECTION.LEFT)
                 {
-                    X = X - 10;
+                    X = X - Z;
                 }
             }
 
