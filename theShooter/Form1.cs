@@ -17,11 +17,14 @@ namespace theShooter
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             game.Check();
+
             if (game.hero.Up)
             {
                 if(e.KeyCode == Keys.Up)
                 {
                     game.hero.ChangeDirection(Hero.DIRECTION.UP);
+                    game.ChangeBullet(Shoot.SHOOTINGDIRECTION.UP);
+
                     
                     game.Move();
                 }
@@ -32,6 +35,7 @@ namespace theShooter
                 if(e.KeyCode == Keys.Down)
                 {
                     game.hero.ChangeDirection(Hero.DIRECTION.DOWN);
+                    game.ChangeBullet(Shoot.SHOOTINGDIRECTION.DOWN);
                     game.Move();
                 }
             }
@@ -41,6 +45,7 @@ namespace theShooter
                 if(e.KeyCode == Keys.Right)
                 {
                     game.hero.ChangeDirection(Hero.DIRECTION.RIGHT);
+                    game.ChangeBullet(Shoot.SHOOTINGDIRECTION.DOWN);
                     game.Move();
                 }
             }
@@ -50,7 +55,16 @@ namespace theShooter
                 if (e.KeyCode == Keys.Left)
                 {
                     game.hero.ChangeDirection(Hero.DIRECTION.LEFT);
+                    game.ChangeBullet(Shoot.SHOOTINGDIRECTION.LEFT);
                     game.Move();
+                }
+            }
+
+            if (true)
+            {
+                if (e.KeyCode == Keys.Space)
+                {
+                    game.Shoot();
                 }
             }
 
@@ -61,7 +75,8 @@ namespace theShooter
         private void timer1_Tick(object sender, EventArgs e)
         {
             game.check();
-
+            
+            
             Invalidate();
         }
 
@@ -77,13 +92,22 @@ namespace theShooter
         {
             game = new FinalGame();
             timer1.Start();
+            timer2.Start();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             game.Draw(e.Graphics);
-            //e.Graphics.DrawImage(new Bitmap("line-dividers-without-background-6.png"), new Rectangle(new Point(15, 50), new Size(50, 50)));
+            //e.Graphics.DrawImage(new Bitmap("shot_poulpi.png"), new Rectangle(new Point(15, 50), new Size(40, 40)));
            
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            game.MoveShoot();
+            game.checkBullets(Width, Height);
+            Invalidate();
+
         }
     }
 }

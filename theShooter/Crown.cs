@@ -28,7 +28,7 @@ namespace theShooter
         public void Draw(Graphics g)
         {
             g.DrawImage(new Bitmap(crown), new Rectangle(new Point(X, Y), new Size(Width, Height)));
-            g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(new Point(X, Y), new Size(Width, Height)));
+            g.DrawRectangle(new Pen(Color.Transparent, 3), new Rectangle(new Point(X, Y), new Size(Width, Height)));
         }
 
         public bool IsHit(Hero hero)

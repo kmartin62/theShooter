@@ -14,6 +14,7 @@ namespace theShooter
         public List<Wall> walls { get; set; }
         public List<Crown> crowns { get; set; }
         public List<Gate> gates { get; set; }
+        public List<Shoot> bullets { get; set; }
         private bool first, second, third;
 
         public Scene()
@@ -23,7 +24,31 @@ namespace theShooter
             walls = new List<Wall>();
             crowns = new List<Crown>();
             gates = new List<Gate>();
+            bullets = new List<Shoot>();
             first = second = third = false;
+        }
+
+        public void MoveBullet()
+        {
+            foreach(Shoot b in bullets)
+            {
+                b.MoveBullet();
+            }
+        }
+
+        //public void ChangeDir(Shoot.SHOOTINGDIRECTION dir)
+        //{
+        //    foreach(Shoot b in bullets)
+        //    {
+        //        b.changeDirection(dir);
+        //    }
+        //}
+
+        public void shoot(Hero hero, Shoot.SHOOTINGDIRECTION dir)
+        {
+            Shoot shoot = new Shoot(hero.X, hero.Y);
+            shoot.changeDirection(dir);
+            bullets.Add(shoot);
         }
 
         public void addGates()
@@ -38,6 +63,39 @@ namespace theShooter
             crowns.Add(new Crown(730, 390, 50, 50)); //0
             crowns.Add(new Crown(730, 20, 50, 50)); //1
             crowns.Add(new Crown(350, 265, 50, 50)); //2
+        }
+
+        public void checkBullet(int x, int y)
+        {
+            for(int i = 0; i < bullets.Count; i++)
+            {
+                for(int j = 0; j < bricks.Count; j++)
+                {
+                    if (bullets[i].IsHit(bricks[j]))
+                    {
+                        bullets[i].ShouldGo = true;
+                    }
+                }
+            }
+
+            for (int i = 0; i < bullets.Count; i++)
+            {
+                for (int j = 0; j < gates.Count; j++)
+                {
+                    if (bullets[i].IsHitGate(gates[j]))
+                    {
+                        bullets[i].ShouldGo = true;
+                    }
+                }
+            }
+
+            for (int i = bullets.Count - 1; i >= 0; i--)
+            {
+                if (bullets[i].ShouldGo)
+                {
+                    bullets.RemoveAt(i);
+                }
+            }
         }
 
         public void check(Hero hero)
@@ -175,6 +233,7 @@ namespace theShooter
             walls.ForEach(c => c.Draw(g));
             crowns.ForEach(c => c.Draw(g));
             gates.ForEach(c => c.Draw(g));
+            bullets.ForEach(c => c.Draw(g));
         }
 
      

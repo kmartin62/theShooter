@@ -10,8 +10,8 @@ namespace theShooter
     class FinalGame
     {
 
-        private Scene scene = new Scene();
-      
+        public Scene scene = new Scene();
+        public Shoot shoot { get; set; }
         public Hero hero { get; set; }
         private int x = 80;
         private int y = 400;
@@ -19,11 +19,27 @@ namespace theShooter
         public FinalGame()
         {
             hero = new Hero(15, 390, 50, 50);
+            shoot = new Shoot(hero.X, hero.Y);
           
             addBrick();
             addWall();
             addCrown();
             addGates();
+        }
+
+        public void MoveShoot()
+        {
+            scene.MoveBullet();
+        }
+
+        public void checkBullets(int x, int y)
+        {
+            scene.checkBullet(x, y);
+        }
+
+        public void Shoot()
+        {
+            scene.shoot(hero, (Shoot.SHOOTINGDIRECTION)hero.dir);
         }
 
         public void addGates()
@@ -55,6 +71,12 @@ namespace theShooter
         {
             scene.Draw(g);
             hero.Draw(g);
+        }
+
+        public void ChangeBullet(Shoot.SHOOTINGDIRECTION direction)
+        {
+          //  scene.ChangeDir(direction);
+            //shoot.changeDirection(direction);
         }
 
         public void ChangeDirection(Hero.DIRECTION direction)

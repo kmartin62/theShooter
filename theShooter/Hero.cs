@@ -10,6 +10,7 @@ namespace theShooter
     class Hero
     {
         public enum DIRECTION { UP, DOWN, LEFT, RIGHT}
+        public Shoot shoot = new Shoot();
         public bool Up { get; set; }
         public bool Down { get; set; }
         public bool Left { get; set; }
@@ -37,29 +38,34 @@ namespace theShooter
         public void Draw(Graphics g)
         {
             g.DrawImage(new Bitmap(hero), new Rectangle(new Point(X, Y), new Size(Width, Height)));
-            g.DrawRectangle(new Pen(Color.Black, 2), new Rectangle(new Point(X, Y), new Size(Width, Height)));
+            g.DrawRectangle(new Pen(Color.Transparent, 2), new Rectangle(new Point(X, Y), new Size(Width, Height)));
         }
 
         public void ChangeDirection(DIRECTION direction)
         {
-            if(direction == DIRECTION.UP)
+            if (direction == DIRECTION.UP)
             {
                 dir = DIRECTION.UP;
+                //shoot.direction = Shoot.SHOOTINGDIRECTION.UP;
+                
             }
 
             if(direction == DIRECTION.DOWN)
             {
                 dir = DIRECTION.DOWN;
+                //shoot.direction = Shoot.SHOOTINGDIRECTION.DOWN;
             }
 
             if(direction == DIRECTION.RIGHT)
             {
                 dir = DIRECTION.RIGHT;
+              //  shoot.direction = Shoot.SHOOTINGDIRECTION.RIGHT;
             }
 
             if(direction == DIRECTION.LEFT)
             {
                 dir = DIRECTION.LEFT;
+              //  shoot.direction = Shoot.SHOOTINGDIRECTION.LEFT;
             }
         }
 
