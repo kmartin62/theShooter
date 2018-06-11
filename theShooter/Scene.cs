@@ -47,8 +47,7 @@ namespace theShooter
 
         public void addZombie()
         {
-            //zombies.Add(new Zombie(700, 30)); //0
-            zombies.Add(new Zombie(270, 270)); //1
+            zombies.Add(new Zombie(270, 270)); //0
             zombies.Add(new Zombie(700, 30)); //1
             zombies.Add(new Zombie(150, 390)); //2
         }
@@ -96,7 +95,7 @@ namespace theShooter
             return false;
         }
 
-        public void MoveZombies() //fix later
+        public void MoveZombies() 
         {
 
             //najdolno
@@ -165,34 +164,11 @@ namespace theShooter
                         start1 = true;
                     }
                 }
-            }
-
-
-            
-
-          
-
-            
-               
-                
-            
-
-
-
-            
-               
-            
-            
+            }  
 
         }
 
-        //public void ChangeDir(Shoot.SHOOTINGDIRECTION dir)
-        //{
-        //    foreach(Shoot b in bullets)
-        //    {
-        //        b.changeDirection(dir);
-        //    }
-        //}
+
 
         public void shoot(Hero hero, Shoot.SHOOTINGDIRECTION dir)
         {
@@ -616,8 +592,6 @@ namespace theShooter
                         hero.Left = false;
                     }
                 }
-
-
 
             }
 
