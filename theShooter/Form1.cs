@@ -103,8 +103,6 @@ namespace theShooter
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             game.Draw(e.Graphics);
-            //e.Graphics.DrawImage(new Bitmap("hillary-clinton.png"), new Rectangle(new Point(735, 250), new Size(60, 60)));
-           
         }
 
         private void timer2_Tick(object sender, EventArgs e)
@@ -117,7 +115,13 @@ namespace theShooter
 
             if (game.endGame)
             {
-                MessageBox.Show("Yes");
+                timer1.Stop();
+                timer2.Stop();
+                if(MessageBox.Show("Game over! Would you like another try?", "Game over", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    game = new FinalGame();
+                }
+
             }
            
             Invalidate();

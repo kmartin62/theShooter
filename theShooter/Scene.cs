@@ -89,7 +89,8 @@ namespace theShooter
         {
             foreach(Zombie z in zombies)
             {
-                return true;
+                if(z.IsHit(hero)) return true;
+
             }
 
             return false;
