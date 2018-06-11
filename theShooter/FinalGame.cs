@@ -39,9 +39,14 @@ namespace theShooter
             scene.deadZombie();
         }
 
-        public void HeroDead()
+        public void EndGame()
         {
-            if (scene.HeroDead(hero))
+            //if (scene.HeroDead(hero))
+            //{
+            //    endGame = true;
+            //}
+
+            if (scene.SafeQueen(hero))
             {
                 endGame = true;
             }
@@ -72,9 +77,9 @@ namespace theShooter
             scene.addGates();
         }
 
-        public void check()
+        public void checkCrowns()
         {
-            scene.check(hero);
+            scene.checkCrowns(hero);
         }
 
         private void addCrown()
@@ -114,9 +119,9 @@ namespace theShooter
             hero.Move();
         }
 
-        public void Check()
+        public void CheckHeroMove()
         {
-            scene.Check(hero);
+            scene.CheckHeroMove(hero);
         }
     }
 }

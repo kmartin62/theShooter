@@ -16,6 +16,7 @@ namespace theShooter
         public List<Gate> gates { get; set; }
         public List<Shoot> bullets { get; set; }
         public List<Zombie> zombies { get; set; }
+        public Princess princess;
         private bool first, second, third;
         private bool start0 = true;
         private bool start1 = true;
@@ -30,8 +31,11 @@ namespace theShooter
             gates = new List<Gate>();
             bullets = new List<Shoot>();
             zombies = new List<Zombie>();
+            princess = new Princess(732, 250, 60, 60);
             first = second = third = false;
         }
+
+
 
         public void MoveBullet()
         {
@@ -43,9 +47,10 @@ namespace theShooter
 
         public void addZombie()
         {
-            zombies.Add(new Zombie(150, 390)); //0
+            //zombies.Add(new Zombie(700, 30)); //0
             zombies.Add(new Zombie(270, 270)); //1
-            zombies.Add(new Zombie(420, 150)); //2
+            zombies.Add(new Zombie(700, 30)); //1
+            zombies.Add(new Zombie(150, 390)); //2
         }
 
         public void deadZombie()
@@ -70,6 +75,17 @@ namespace theShooter
             }
         }
 
+        public bool SafeQueen(Hero hero)
+        {
+            if (princess.IsHit(hero))
+            {
+                princess.Safe = true;
+                return true;
+            }
+
+            return false;
+        }
+
         public bool HeroDead(Hero hero)
         {
             foreach(Zombie z in zombies)
@@ -80,78 +96,92 @@ namespace theShooter
             return false;
         }
 
-        public void MoveZombies()
+        public void MoveZombies() //fix later
         {
 
-            if (!zombies[0].Shot)
+            //najdolno
+            if (zombies.Count == 3)
+            {
+                if (start2)
+                {
+                    zombies[2].X += 50;
+                    if (zombies[2].X >= 700)
+                    {
+                        start2 = false;
+                    }
+                }
+
+                if (!start2)
+                {
+                    zombies[2].X -= 50;
+                    if (zombies[2].X < 200)
+                    {
+                        start2 = true;
+                    }
+                }
+            }
+
+
+            //sredno
+            if (zombies.Count >= 1)
             {
                 if (start0)
                 {
                     zombies[0].X += 50;
-                    if (zombies[0].X >= 700)
+                    if (zombies[0].X > 450)
                     {
                         start0 = false;
                     }
                 }
+
+                if (!start0)
+                {
+                    zombies[0].X -= 50;
+                    if (zombies[0].X < 300)
+                    {
+                        start0 = true;
+                    }
+                }
             }
 
-            
-            if (!start0)
+
+            //najgorno
+            if (zombies.Count >= 2)
             {
-                zombies[0].X -= 50;
-                if(zombies[0].X <= 150)
+                if (start1)
                 {
-                    start0 = true;
+                    zombies[1].X -= 50;
+                    if (zombies[1].X < 500)
+                    {
+                        start1 = false;
+                    }
+                }
+
+                if (!start1)
+                {
+                    zombies[1].X += 50;
+                    if (zombies[1].X > 700)
+                    {
+                        start1 = true;
+                    }
                 }
             }
-           
 
-                //start1 za 1 zombie
-                if (!zombies[1].Shot)
-                {
-                    if (start1)
-                    {
-                        zombies[1].X += 50;
-                        if (zombies[1].X >= 450)
-                        {
-                            start1 = false;
-                        }
-                    }
-
-                    if (!start1)
-                    {
-                        zombies[1].X -= 50;
-                        if (zombies[1].X <= 270)
-                        {
-                            start1 = true;
-                        }
-                    }
-                }
-            
 
             
 
-                //start2 za 2 zombie
-                if (!zombies[2].Shot)
-                {
-                    if (!start2)
-                    {
-                        zombies[2].X += 50;
-                        if (zombies[2].X >= 450)
-                        {
-                            start2 = true;
-                        }
-                    }
+          
 
-                    if (start2)
-                    {
-                        zombies[2].X -= 50;
-                        if (zombies[2].X <= 270)
-                        {
-                            start2 = false;
-                        }
-                    }
-                }
+            
+               
+                
+            
+
+
+
+            
+               
+            
             
 
         }
@@ -226,7 +256,7 @@ namespace theShooter
             }
         }
 
-        public void check(Hero hero)
+        public void checkCrowns(Hero hero)
         {
             if(crowns.Count == 2)
             {
@@ -363,11 +393,12 @@ namespace theShooter
             gates.ForEach(c => c.Draw(g));
             bullets.ForEach(c => c.Draw(g));
             zombies.ForEach(c => c.Draw(g));
+            princess.Draw(g);
         }
 
      
 
-        public void Check(Hero hero)
+        public void CheckHeroMove(Hero hero)
         {
             if (hero.X < walls[0].X)
             {

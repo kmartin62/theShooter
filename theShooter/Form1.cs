@@ -12,11 +12,12 @@ namespace theShooter
 {
     public partial class Form1 : Form
     {
-        private FinalGame game;       
+        private FinalGame game;
+        private Front front = new Front();
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            game.Check();
+            game.CheckHeroMove();
 
             if (game.hero.Up)
             {
@@ -74,7 +75,7 @@ namespace theShooter
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            game.check();
+            game.checkCrowns();
             
             
             Invalidate();
@@ -84,6 +85,10 @@ namespace theShooter
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            //if (front.DialogResult == DialogResult.OK)
+            
+                front.ShowDialog();
+            
             DoubleBuffered = true;
             newGame(); 
         }
@@ -98,7 +103,7 @@ namespace theShooter
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             game.Draw(e.Graphics);
-            //e.Graphics.DrawImage(new Bitmap("shot_poulpi.png"), new Rectangle(new Point(15, 50), new Size(40, 40)));
+            //e.Graphics.DrawImage(new Bitmap("hillary-clinton.png"), new Rectangle(new Point(735, 250), new Size(60, 60)));
            
         }
 
@@ -110,10 +115,10 @@ namespace theShooter
             //game.HeroDead();
             game.checkDeadZombie();
 
-            //if (game.endGame)
-           // {
-           //     MessageBox.Show("Yes");
-           // }
+            if (game.endGame)
+            {
+                MessageBox.Show("Yes");
+            }
            
             Invalidate();
 
